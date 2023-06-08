@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var cityInputEl = document.getElementById('city');
   var searchBtn = document.getElementById('search-btn');
+  var currentForecastEl = document.getElementById('current-forecast');
+  var cityHeaderEl = document.getElementById('city-date');
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -40,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           response.json().then(function (data) {
             console.log(data);
+            renderCurrentConditions(data.city.name, data.list[0]);
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -48,6 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(function (error) {
         alert('Unable to connect to API');
       });
+  }
+
+  function renderCurrentConditions(city, obj) {
+    cityHeaderEl.innerHTML = city;
   }
   
   searchBtn.addEventListener("click", formSubmitHandler);
