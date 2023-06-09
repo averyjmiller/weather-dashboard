@@ -1,0 +1,64 @@
+header {
+  background-image: linear-gradient(to right,rgb(169, 206, 255),rgb(5, 52, 94));
+  color: white;
+  width: 100%;
+  padding: 1%;
+  text-align: center;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > * {
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+input {
+  height: 35px;
+  padding: 0 5px;
+  border: 1px solid rgb(189, 189, 189);
+}
+
+button {
+  height: 30px;
+  border: none;
+  background-color: rgb(110, 157, 253);
+  color: white;
+}
+
+input,
+button,
+#saved-city {
+  border-radius: 5px;
+}
+
+#search-history {
+  border-top: 1px solid rgb(189, 189, 189);
+  padding: 0;
+}
+
+#saved-city {
+  height: 30px;
+  border: none;
+  background-color: rgb(189, 189, 189);
+  text-align: center;
+  margin: 10px 0;
+  padding-top: 2px;
+}
+
+#saved-city:hover {
+  cursor: pointer;
+}
+

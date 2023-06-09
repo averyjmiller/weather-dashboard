@@ -166,6 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   searchBtn.addEventListener("click", formSubmitHandler);
 
-  searchListEl.addEventListener("click", renderSavedCityForecast)
+  searchListEl.addEventListener("click", renderSavedCityForecast);
 
 });
