@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var cityInputEl = document.getElementById('city');
   var searchBtn = document.getElementById('search-btn');
-  var currentForecastEl = document.getElementById('current-forecast');
   var cityHeaderEl = document.getElementById('city-date');
+  var currentTempEl = document.getElementById('current-temp');
+  var currentWindEl = document.getElementById('current-wind');
+  var currentHumidityEl = document.getElementById('current-humidity');
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -14,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(city) {
       fetchCityCoords(city);
     }
+    cityInputEl.value = "";
   }
 
   function fetchCityCoords(city) {
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok) {
           response.json().then(function (data) {
             console.log(data);
-            renderCurrentConditions(data.city.name, data.list[0]);
+            renderForecast(data);
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -53,8 +56,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  function renderCurrentConditions(city, obj) {
-    cityHeaderEl.innerHTML = city;
+  function renderForecast(data) {
+    var city = data.city.name
+    var currentData = data.list[0];
+    var currentDate = dayjs(currentData.dt_txt.split(" ", 1)).format("M/D/YYYY");
+    
+    cityHeaderEl.innerHTML = city + " " + currentDate;
+    currentTempEl.innerHTML = "Temp: " + currentData.main.temp + "&degF";
+    currentWindEl.innerHTML = "Wind: " + currentData.wind.speed + " MPH";
+    currentHumidityEl.innerHTML = "Humidity: " + currentData.main.humidity + " %";
+
+
   }
   
   searchBtn.addEventListener("click", formSubmitHandler);
