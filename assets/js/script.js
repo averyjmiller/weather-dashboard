@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   var windEl = document.querySelectorAll('#wind');
   var humidityEl = document.querySelectorAll('#humidity');
   var searchListEl = document.getElementById('search-history');
-  var savedCityEl = document.querySelectorAll('#saved-city');
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -90,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var elementIndex = 0;
 
     while(nextIndex < data.list.length) {
-      console.log(data.list[nextIndex]);
-
       dateEl[elementIndex].innerHTML = data.list[nextIndex].dt_txt.split(" ", 1);
       iconEl[elementIndex].src = "https://openweathermap.org/img/wn/" + data.list[nextIndex].weather[0].icon + "@2x.png";
       tempEl[elementIndex].innerHTML = data.list[nextIndex].main.temp + "&degF";
@@ -119,11 +116,32 @@ document.addEventListener("DOMContentLoaded", () => {
       var newList = document.createElement('li');
       newList.innerHTML = cityName;
       newList.setAttribute('id', 'saved-city');
-      searchListEl.append(newList);  
+      searchListEl.append(newList);
+
+      var savedCity = {
+        name: cityName,
+        coord: cityCoord
+      }
+
+      localStorage.setItem(cityName, JSON.stringify(savedCity));
     }
 
   }
+
+  function renderSavedCity(event) {
+    if(event.target.id == 'saved-city') {
+      var clickedCity = event.target.innerHTML;
+      var savedCityObj = JSON.parse(localStorage.getItem(clickedCity));
+      var savedCoord = savedCityObj.coord;
+      var cityLat = JSON.stringify(savedCoord.lat);
+      var cityLon = JSON.stringify(savedCoord.lon);
+
+      fetchForecast(cityLat, cityLon);
+    }
+  }
   
   searchBtn.addEventListener("click", formSubmitHandler);
+
+  searchListEl.addEventListener("click", renderSavedCity)
 
 });
