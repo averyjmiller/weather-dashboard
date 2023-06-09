@@ -118,30 +118,46 @@ document.addEventListener("DOMContentLoaded", () => {
       newList.setAttribute('id', 'saved-city');
       searchListEl.append(newList);
 
-      var savedCity = {
-        name: cityName,
-        coord: cityCoord
+      var cities = JSON.parse(localStorage.getItem("cities"));
+
+      if(!cities) {
+        cities = [];
       }
 
-      localStorage.setItem(cityName, JSON.stringify(savedCity));
+      cities.push({
+        name: cityName,
+        coord: cityCoord
+      });
+
+      localStorage.setItem("cities", JSON.stringify(cities));
     }
 
   }
 
-  function renderSavedCity(event) {
+  function renderSavedCityForecast(event) {
     if(event.target.id == 'saved-city') {
       var clickedCity = event.target.innerHTML;
-      var savedCityObj = JSON.parse(localStorage.getItem(clickedCity));
-      var savedCoord = savedCityObj.coord;
-      var cityLat = JSON.stringify(savedCoord.lat);
-      var cityLon = JSON.stringify(savedCoord.lon);
-
-      fetchForecast(cityLat, cityLon);
+      var cities = JSON.parse(localStorage.getItem("cities"));
+      for(var i = 0; i < cities.length; i++) {
+        if(cities[i].name == clickedCity) {
+          var clickedCityObj = cities[i];
+          var lat = JSON.stringify(clickedCityObj.coord.lat);
+          var lon = JSON.stringify(clickedCityObj.coord.lon);
+          fetchForecast(lat, lon);
+          break;
+        }
+      }
     }
   }
+
+  function renderSearchHistory() {
+
+  }
+
+  renderSearchHistory();
   
   searchBtn.addEventListener("click", formSubmitHandler);
 
-  searchListEl.addEventListener("click", renderSavedCity)
+  searchListEl.addEventListener("click", renderSavedCityForecast)
 
 });
