@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   var currentTempEl = document.getElementById('current-temp');
   var currentWindEl = document.getElementById('current-wind');
   var currentHumidityEl = document.getElementById('current-humidity');
+  var dateEl = document.querySelectorAll('#date');
+  var iconEl = document.querySelectorAll('#weather-icon');
+  var tempEl = document.querySelectorAll('#temp');
+  var windEl = document.querySelectorAll('#wind');
+  var humidityEl = document.querySelectorAll('#humidity');
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -73,8 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    var elementIndex = 0;
+
     while(nextIndex < data.list.length) {
       console.log(data.list[nextIndex]);
+
+      dateEl[elementIndex].innerHTML = data.list[nextIndex].dt_txt.split(" ", 1);
+      tempEl[elementIndex].innerHTML = data.list[nextIndex].main.temp + "&degF";
+      windEl[elementIndex].innerHTML = data.list[nextIndex].wind.speed + " MPH";
+      humidityEl[elementIndex].innerHTML = data.list[nextIndex].main.humidity + " %";
+
+      elementIndex++;
       nextIndex += 8;
     }
 
