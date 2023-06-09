@@ -151,7 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderSearchHistory() {
-
+    var cities = JSON.parse(localStorage.getItem("cities"));
+    if(cities) {
+      for(var i = 0; i < cities.length; i++) {
+        var newList = document.createElement('li');
+        newList.innerHTML = cities[i].name;
+        newList.setAttribute('id', 'saved-city');
+        searchListEl.append(newList);
+      }
+    }
   }
 
   renderSearchHistory();
