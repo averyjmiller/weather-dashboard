@@ -59,13 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderForecast(data) {
     var city = data.city.name
     var currentData = data.list[0];
-    var currentDate = dayjs(currentData.dt_txt.split(" ", 1)).format("M/D/YYYY");
-    
+    var currentDate = currentData.dt_txt.split(" ", 1);
+
     cityHeaderEl.innerHTML = city + " " + currentDate;
     currentTempEl.innerHTML = "Temp: " + currentData.main.temp + "&degF";
     currentWindEl.innerHTML = "Wind: " + currentData.wind.speed + " MPH";
     currentHumidityEl.innerHTML = "Humidity: " + currentData.main.humidity + " %";
 
+    for(var i = 1; i < data.list.length; i++) {
+      if(data.list[i].dt_txt.includes("00:00:00")) {
+        var nextIndex = i;
+        break;
+      }
+    }
+
+    while(nextIndex < data.list.length) {
+      console.log(data.list[nextIndex]);
+      nextIndex += 8;
+    }
 
   }
   
