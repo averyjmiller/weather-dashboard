@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   var tempEl = document.querySelectorAll('#temp');
   var windEl = document.querySelectorAll('#wind');
   var humidityEl = document.querySelectorAll('#humidity');
+  var searchListEl = document.getElementById('search-history');
+  var savedCityEl = document.querySelectorAll('#saved-city');
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -55,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            console.log(data);
             renderForecast(data);
+            saveHistory(data.city);
           });
         } else {
           alert('ERROR: ' + response.statusText);
@@ -98,6 +100,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
       elementIndex++;
       nextIndex += 8;
+    }
+  }
+
+  function saveHistory(city) {
+    var cityName = city.name;
+    var cityCoord = city.coord;
+    
+    var alreadySaved = false;
+
+    searchListEl.childNodes.forEach(function(child) {
+      if(child.innerHTML == cityName) {
+        alreadySaved = true;
+      }
+    });
+
+    if(!alreadySaved) {
+      var newList = document.createElement('li');
+      newList.innerHTML = cityName;
+      newList.setAttribute('id', 'saved-city');
+      searchListEl.append(newList);  
     }
 
   }
