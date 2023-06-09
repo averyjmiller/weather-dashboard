@@ -4,11 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   var cityInputEl = document.getElementById('city');
   var searchBtn = document.getElementById('search-btn');
   var cityHeaderEl = document.getElementById('city-date');
+  var currentIconEl = document.getElementById('current-icon');
   var currentTempEl = document.getElementById('current-temp');
   var currentWindEl = document.getElementById('current-wind');
   var currentHumidityEl = document.getElementById('current-humidity');
   var dateEl = document.querySelectorAll('#date');
-  var iconEl = document.querySelectorAll('#weather-icon');
+  var iconEl = document.querySelectorAll('#icon-image');
   var tempEl = document.querySelectorAll('#temp');
   var windEl = document.querySelectorAll('#wind');
   var humidityEl = document.querySelectorAll('#humidity');
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var currentDate = currentData.dt_txt.split(" ", 1);
 
     cityHeaderEl.innerHTML = city + " " + currentDate;
+    currentIconEl.src = "https://openweathermap.org/img/wn/" + currentData.weather[0].icon + "@2x.png";
     currentTempEl.innerHTML = "Temp: " + currentData.main.temp + "&degF";
     currentWindEl.innerHTML = "Wind: " + currentData.wind.speed + " MPH";
     currentHumidityEl.innerHTML = "Humidity: " + currentData.main.humidity + " %";
@@ -84,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(data.list[nextIndex]);
 
       dateEl[elementIndex].innerHTML = data.list[nextIndex].dt_txt.split(" ", 1);
+      iconEl[elementIndex].src = "https://openweathermap.org/img/wn/" + data.list[nextIndex].weather[0].icon + "@2x.png";
       tempEl[elementIndex].innerHTML = data.list[nextIndex].main.temp + "&degF";
       windEl[elementIndex].innerHTML = data.list[nextIndex].wind.speed + " MPH";
       humidityEl[elementIndex].innerHTML = data.list[nextIndex].main.humidity + " %";
