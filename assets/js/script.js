@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(city) {
       city = city.split(' ').join('');
-      console.log(city);
       fetchCityCoords(city);
     }
     cityInputEl.value = "";
@@ -33,15 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(geoUrl)
       .then(function (response) {
         if (response.ok) {
-          response.json().then(function (data) {
-            fetchForecast(data[0].lat, data[0].lon);
-          });
+          response.json()
+            .then(function (data) {
+              fetchForecast(data[0].lat, data[0].lon);
+            })
+            .catch(function (error) {
+              alert('ERROR: Invalid city input');
+            });
         } else {
-          alert('Error: ' + response.statusText);
+          alert('ERROR: ' + response.statusText);
         }
       })
       .catch(function (error) {
-        alert('Unable to connect to API');
+        alert('ERROR: Unable to connect to API');
       });
   }
 
@@ -56,11 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
             renderForecast(data);
           });
         } else {
-          alert('Error: ' + response.statusText);
+          alert('ERROR: ' + response.statusText);
         }
       })
       .catch(function (error) {
-        alert('Unable to connect to API');
+        alert('ERROR: Unable to connect to API');
       });
   }
 
