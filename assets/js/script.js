@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     var city = cityInputEl.value.trim();
 
     if(city) {
+      city = city.split(' ').join('');
+      console.log(city);
       fetchCityCoords(city);
     }
     cityInputEl.value = "";
