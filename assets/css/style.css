@@ -63,9 +63,15 @@ button,
 }
 
 #current-forecast {
-  border: 1px solid black;
+  border: 1px solid rgb(189, 189, 189);
   margin: 20px 0;
   padding: 10px;
+}
+
+#current-forecast div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .forecast-container {
@@ -79,8 +85,8 @@ ul {
 }
 
 .weather-card {
-  border: 1px solid black;
   background-color: rgb(23, 39, 54);
   color: white;
+  border-radius: 5px;
   width: 200px;
 }
