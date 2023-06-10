@@ -91,9 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
     while(nextIndex < data.list.length) {
       dateEl[elementIndex].innerHTML = data.list[nextIndex].dt_txt.split(" ", 1);
       iconEl[elementIndex].src = "https://openweathermap.org/img/wn/" + data.list[nextIndex].weather[0].icon + "@2x.png";
-      tempEl[elementIndex].innerHTML = data.list[nextIndex].main.temp + "&degF";
-      windEl[elementIndex].innerHTML = data.list[nextIndex].wind.speed + " MPH";
-      humidityEl[elementIndex].innerHTML = data.list[nextIndex].main.humidity + " %";
+      tempEl[elementIndex].innerHTML = "Temp: " + data.list[nextIndex].main.temp + "&degF";
+      windEl[elementIndex].innerHTML = "Wind: " + data.list[nextIndex].wind.speed + " MPH";
+      humidityEl[elementIndex].innerHTML = "Humidity: " + data.list[nextIndex].main.humidity + " %";
 
       elementIndex++;
       nextIndex += 8;

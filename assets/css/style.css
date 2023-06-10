@@ -62,10 +62,25 @@ button,
   cursor: pointer;
 }
 
-.weather-card {
-  border: 1px solid black;
-}
-
 #current-forecast {
   border: 1px solid black;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+ul {
+  padding: 0 10px;
+}
+
+.weather-card {
+  border: 1px solid black;
+  background-color: rgb(23, 39, 54);
+  color: white;
+  width: 200px;
 }
