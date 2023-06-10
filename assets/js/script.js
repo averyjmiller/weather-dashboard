@@ -72,6 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     var city = data.city.name
     var currentData = data.list[0];
     var currentDate = currentData.dt_txt.split(" ", 1);
+    currentDate = currentDate[0];
+    currentDate = currentDate.split('-');
+    currentDate = "(" + currentDate[1] + "/" + currentDate[2] + "/" + currentDate[0] + ")";
 
     cityHeaderEl.innerHTML = city + " " + currentDate;
     currentIconEl.src = "https://openweathermap.org/img/wn/" + currentData.weather[0].icon + "@2x.png";
@@ -89,7 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
     var elementIndex = 0;
 
     while(nextIndex < data.list.length) {
-      dateEl[elementIndex].innerHTML = data.list[nextIndex].dt_txt.split(" ", 1);
+      var date = data.list[nextIndex].dt_txt.split(" ", 1);
+      date = date[0];
+      date = date.split('-');
+      date = date[1] + "/" + date[2] + "/" + date[0];
+      dateEl[elementIndex].innerHTML = date;
       iconEl[elementIndex].src = "https://openweathermap.org/img/wn/" + data.list[nextIndex].weather[0].icon + "@2x.png";
       tempEl[elementIndex].innerHTML = "Temp: " + data.list[nextIndex].main.temp + "&degF";
       windEl[elementIndex].innerHTML = "Wind: " + data.list[nextIndex].wind.speed + " MPH";
