@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto Slab', serif;
+}
+
 header {
   background-image: linear-gradient(to right,rgb(169, 206, 255),rgb(5, 52, 94));
   color: white;
