@@ -192,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     localStorage.removeItem("cities");
+    init();
   }
 
   init();
