@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var futureForecastEl = document.getElementById('future-forecast');
   var cityInputEl = document.getElementById('city');
   var searchBtn = document.getElementById('search-btn');
+  var clearBtn = document.getElementById('clear');
   var cityHeaderEl = document.getElementById('city-date');
   var currentIconEl = document.getElementById('current-icon');
   var currentTempEl = document.getElementById('current-temp');
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentDate = "(" + currentDate[1] + "/" + currentDate[2] + "/" + currentDate[0] + ")";
 
     makeVisible();
-    
+
     cityHeaderEl.innerHTML = city + " " + currentDate;
     currentIconEl.src = "https://openweathermap.org/img/wn/" + currentData.weather[0].icon + "@2x.png";
     currentTempEl.innerHTML = "Temp: " + currentData.main.temp + "&degF";
@@ -183,12 +184,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function clearHistory(event) {
+    event.preventDefault();
+
+    while(searchListEl.hasChildNodes()) {
+      searchListEl.removeChild(searchListEl.firstChild);
+    }
+
+    localStorage.removeItem("cities");
+  }
+
   init();
-
   renderSearchHistory();
-  
   searchBtn.addEventListener("click", formSubmitHandler);
-
   searchListEl.addEventListener("click", renderSavedCityForecast);
-
+  clearBtn.addEventListener("click", clearHistory);
 });

@@ -46,7 +46,7 @@ button,
 
 #search-history {
   border-top: 1px solid rgb(189, 189, 189);
-  padding: 0;
+  padding-top: 10px;
 }
 
 #saved-city {
@@ -54,12 +54,17 @@ button,
   border: none;
   background-color: rgb(189, 189, 189);
   text-align: center;
-  margin: 10px 0;
+  margin-bottom: 10px;
   padding-top: 2px;
 }
 
 #saved-city:hover {
   cursor: pointer;
+}
+
+#clear {
+  width: 100px;
+  background-color: rgb(255, 111, 111);
 }
 
 #current-forecast {
@@ -82,7 +87,8 @@ button,
 }
 
 ul {
-  padding: 0 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .weather-card {
@@ -90,4 +96,5 @@ ul {
   color: white;
   border-radius: 5px;
   width: 200px;
+  padding: 10px;
 }
