@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fetchCityCoords(city) {
-    var geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
+    var geoUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
 
     fetch(geoUrl)
       .then(function (response) {
