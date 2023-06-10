@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   var apiKey = "afbfa8ef52bbf8f96d3252975a945fb3";
 
+  var currentForecastEl = document.getElementById('current-forecast');
+  var futureForecastEl = document.getElementById('future-forecast');
   var cityInputEl = document.getElementById('city');
   var searchBtn = document.getElementById('search-btn');
   var cityHeaderEl = document.getElementById('city-date');
@@ -14,6 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
   var windEl = document.querySelectorAll('#wind');
   var humidityEl = document.querySelectorAll('#humidity');
   var searchListEl = document.getElementById('search-history');
+
+  function init() {
+    currentForecastEl.setAttribute('style', 'visibility: hidden');
+    futureForecastEl.setAttribute('style', 'visibility: hidden');
+  }
+
+  function makeVisible() {
+    currentForecastEl.setAttribute('style', 'visibility: visible');
+    futureForecastEl.setAttribute('style', 'visibility: visible');
+  }
 
   function formSubmitHandler(event) {
     event.preventDefault();
@@ -76,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
     currentDate = currentDate.split('-');
     currentDate = "(" + currentDate[1] + "/" + currentDate[2] + "/" + currentDate[0] + ")";
 
+    makeVisible();
+    
     cityHeaderEl.innerHTML = city + " " + currentDate;
     currentIconEl.src = "https://openweathermap.org/img/wn/" + currentData.weather[0].icon + "@2x.png";
     currentTempEl.innerHTML = "Temp: " + currentData.main.temp + "&degF";
@@ -168,6 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
+
+  init();
 
   renderSearchHistory();
   
